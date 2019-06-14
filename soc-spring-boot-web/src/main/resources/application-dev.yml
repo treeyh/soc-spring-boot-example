@@ -1,0 +1,46 @@
+spring:
+  application:
+    name: ${pro.name}
+  datasource:
+    hikari:
+      jdbc-url: jdbc:mysql://127.0.0.1:3306/soc_spring_boot_example?useUnicode=true&characterEncoding=UTF-8&useSSL=false&transformedBitIsBoolean=true&zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=Asia/Shanghai
+      username: root
+      password: mysqlpw
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      maximum-pool-size: 15
+      pool-name: ${pro.name}-db
+    name: demo
+    filters: config,log4j,stat
+  redis:
+    host: 127.0.0.1
+    #    password:
+    port: 6379
+    key-pre: soc-web
+    app-time-out: 300
+    lettuce:
+      pool:
+        max-active: 10
+        max-idle: 4
+        max-wait: -1ms
+        min-idle: 2
+
+
+
+logging:
+  path: /data/logs/${pro.name}
+  register-shutdown-hook: false
+
+#zookeeper:
+#  server: 127.0.0.1:2181,127.0.0.1:2182,127.0.0.1:2183
+#  sessionTime: 3000
+#  path: /work/run/running
+
+soc:
+  web:
+    checkSign:
+      # 校验状态是否开启，1开启，其他不开启
+      status: 1
+      # 请求时间戳允许偏差正负范围，秒
+      timeRange: 300
+      # 忽略sign，通过该sign调用不做签名和时间校验
+      magicSign: xxxxx
