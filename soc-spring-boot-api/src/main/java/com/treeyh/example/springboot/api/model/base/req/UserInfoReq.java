@@ -13,4 +13,5 @@ import java.util.Date;
 public class UserInfoReq extends UserInfoBase {
 
 
+    
 }
