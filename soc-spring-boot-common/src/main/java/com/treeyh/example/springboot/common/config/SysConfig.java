@@ -15,10 +15,10 @@ import org.springframework.stereotype.Component;
 public class SysConfig  extends AppBeanContext {
 
 
-    @Value("${spring.redis.key-pre}")
+    @Value("${spring.redis.key-pre:demo}")
     private String cacheKeyPre;
 
-    @Value("${spring.redis.app-time-out}")
+    @Value("${spring.redis.app-time-out:600}")
     private Integer cacheAppTimeOut;
 
 
