@@ -37,7 +37,6 @@ public class WebApplication extends SpringBootServletInitializer {
     // jar启动入口
     public static void main(String[] args) throws Exception {
         logger.info("Application start....");
-
         ConfigurableApplicationContext context = configureApplication(new SpringApplicationBuilder()).run(args);
 
         logger.info("Application start over.");

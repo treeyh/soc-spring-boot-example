@@ -116,6 +116,13 @@ public class UserInfoDomain {
             throw new SysErrorException(SysResultCode.USER_INFO_NOT_EXIST);
         }
 
-        return repositoryContext.getUserInfoRepository().updateById(userInfoBo);
+
+        Integer result = repositoryContext.getUserInfoRepository().updateById(userInfoBo);
+
+        if(result > 0){
+            String cacheKey = SysConstants.CACHE_KEY_PRE +"user:"+ userInfoBo.getId();
+            repositoryContext.getRedisHelper().remove(cacheKey);
+        }
+        return result;
     }
 }

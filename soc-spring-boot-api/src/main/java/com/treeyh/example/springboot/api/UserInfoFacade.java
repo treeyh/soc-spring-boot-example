@@ -25,7 +25,7 @@ public interface UserInfoFacade {
     /**
      * 新建用户
      *
-     * @param userReq
+     * @param userInfoReq
      * @return
      */
     @ApiOperation(value = "新建用户",
@@ -33,12 +33,12 @@ public interface UserInfoFacade {
             httpMethod = "POST",
             notes = "新建用户")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "userReq", value = "用户", required = true, dataType = "UserReq", paramType = "body")
+            @ApiImplicitParam(name = "userInfoReq", value = "用户", required = true, dataType = "com.treeyh.example.springboot.api.model.base.req.UserInfoReq", paramType = "body")
     })
     @RequestMapping(value = {"/user"},
             method = {RequestMethod.POST},
             produces = {MediaType.APPLICATION_JSON_VALUE})
-    ReturnResult<UserInfoResp> createUser(@RequestBody UserInfoReq userReq);
+    ReturnResult<UserInfoResp> createUser(@RequestBody UserInfoReq userInfoReq);
 
 
     /**
@@ -68,7 +68,7 @@ public interface UserInfoFacade {
      */
     @ApiOperation(value = "删除用户",
             produces = MediaType.APPLICATION_JSON_VALUE,
-            httpMethod = "GET",
+            httpMethod = "DELETE",
             notes = "删除用户")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "用户id", required = true, dataType = "Long", paramType = "path")
@@ -83,21 +83,21 @@ public interface UserInfoFacade {
      * 更新用户信息
      *
      * @param id
-     * @param userReq
+     * @param userInfoReq
      * @return
      */
     @ApiOperation(value = "更新用户信息",
             produces = MediaType.APPLICATION_JSON_VALUE,
-            httpMethod = "GET",
+            httpMethod = "PUT",
             notes = "更新用户信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "用户id", required = true, dataType = "Long", paramType = "path"),
-            @ApiImplicitParam(name = "userReq", value = "对象", required = true, dataType = "UserReq", paramType = "body")
+            @ApiImplicitParam(name = "userInfoReq", value = "对象", required = true, dataType = "com.treeyh.example.springboot.api.model.base.req.UserInfoReq", paramType = "body")
     })
     @RequestMapping(value = {"/user/{id}"},
             method = {RequestMethod.PUT},
             produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ReturnResult<UserInfoReq> updateById(@PathVariable("id") Long id, @RequestBody UserInfoReq userReq);
+    public ReturnResult<UserInfoReq> updateById(@PathVariable("id") Long id, @RequestBody UserInfoReq userInfoReq);
 
 
     /**
