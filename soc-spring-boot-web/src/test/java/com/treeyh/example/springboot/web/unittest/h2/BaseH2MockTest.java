@@ -34,7 +34,7 @@ public class BaseH2MockTest {
 
     @Rule
     public DBUnitRule dbUnitRule = DBUnitRule.
-            instance(() -> flyway.getDataSource().getConnection());
+            instance(() -> flyway.getConfiguration().getDataSource().getConnection());
 
 
     @BeforeClass
