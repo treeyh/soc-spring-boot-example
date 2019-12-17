@@ -49,6 +49,7 @@ Thumbs.db
 /build
 */build
 /LOGGING_ROOT_IS_UNDEFINED
+/src
 
 # IntelliJ specific files/directories
 out

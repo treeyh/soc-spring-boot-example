@@ -1,5 +1,6 @@
 package com.treeyh.example.springboot.dao.config;
 
+import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import com.zaxxer.hikari.HikariDataSource;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
@@ -26,45 +27,59 @@ import javax.sql.DataSource;
  * @description 描述
  * @create 2019-05-21 11:04
  */
-@Configuration
+//@Configuration
+//@EnableTransactionManagement
+//@MapperScan(value = "com.treeyh.example.springboot.dao", sqlSessionFactoryRef = "sqlSessionFactoryBean")
+
 @EnableTransactionManagement
-@MapperScan(value = "com.treeyh.example.springboot.dao", sqlSessionFactoryRef = "sqlSessionFactoryBean")
-public class DataSourceConfig implements TransactionManagementConfigurer {
+@Configuration
+@MapperScan("com.treeyh.example.springboot.dao*")
+public class DataSourceConfig { //implements TransactionManagementConfigurer {
 
     private final static Logger logger = LoggerFactory.getLogger(DataSourceConfig.class);
 
-    @Value(value = "classpath:bean/mybatis/mapping/*.xml")
-    private Resource[] mapperLocations;
-
-    @Value(value = "classpath:mybatis-config.xml")
-    private Resource configLocation;
+//    @Value(value = "classpath:bean/mybatis/mapping/*.xml")
+//    private Resource[] mapperLocations;
+//
+//    @Value(value = "classpath:mybatis-config.xml")
+//    private Resource configLocation;
 
 
 //    @Value("${spring.datasourceType}")
 //    private Class<? extends DataSource> datasourceType;
 
 
-    @Primary
-    @Bean(name = "sqlSessionFactoryBean")
-    public SqlSessionFactoryBean sqlSessionFactory(@Qualifier("dataSource") DataSource dataSource) {
-        SqlSessionFactoryBean ssfb = new SqlSessionFactoryBean();
-        ssfb.setDataSource(dataSource);
-        ssfb.setMapperLocations(mapperLocations);
-        ssfb.setConfigLocation(configLocation);
-        ssfb.setTypeAliasesPackage("com.treeyh.example.springboot.dao");
-        return ssfb;
-    }
+//    @Primary
+//    @Bean(name = "sqlSessionFactoryBean")
+//    public SqlSessionFactoryBean sqlSessionFactory(@Qualifier("dataSource") DataSource dataSource) {
+//        SqlSessionFactoryBean ssfb = new SqlSessionFactoryBean();
+//        ssfb.setDataSource(dataSource);
+//        ssfb.setMapperLocations(mapperLocations);
+//        ssfb.setConfigLocation(configLocation);
+//        ssfb.setTypeAliasesPackage("com.treeyh.example.springboot.dao");
+//        return ssfb;
+//    }
+//
+//    @Primary
+//    @Bean(name = "dataSource", destroyMethod = "close") //initMethod = "init",
+//    @ConfigurationProperties(prefix = "spring.datasource.hikari")
+//    public DataSource dataSource() {
+//
+//        return DataSourceBuilder.create().type(HikariDataSource.class).build();
+//    }
+//
+//    @Override
+//    public PlatformTransactionManager annotationDrivenTransactionManager() {
+//        return new DataSourceTransactionManager(dataSource());
+//    }
 
-    @Primary
-    @Bean(name = "dataSource", destroyMethod = "close") //initMethod = "init",
-    @ConfigurationProperties(prefix = "spring.datasource.hikari")
-    public DataSource dataSource() {
-
-        return DataSourceBuilder.create().type(HikariDataSource.class).build();
-    }
-
-    @Override
-    public PlatformTransactionManager annotationDrivenTransactionManager() {
-        return new DataSourceTransactionManager(dataSource());
+    @Bean
+    public PaginationInterceptor paginationInterceptor() {
+        PaginationInterceptor paginationInterceptor = new PaginationInterceptor();
+        // 设置请求的页面大于最大页后操作， true调回到首页，false 继续请求  默认false
+        // paginationInterceptor.setOverflow(false);
+        // 设置最大单页限制数量，默认 500 条，-1 不受限制
+        // paginationInterceptor.setLimit(500);
+        return paginationInterceptor;
     }
 }

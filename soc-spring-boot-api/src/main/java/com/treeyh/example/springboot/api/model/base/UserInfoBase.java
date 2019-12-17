@@ -22,7 +22,7 @@ public class UserInfoBase {
     /**
      * 性别，0未知，1男，2女
      */
-    private Byte sex;
+    private Integer sex;
 
     /**
      * 生日
@@ -48,7 +48,7 @@ public class UserInfoBase {
     public UserInfoBase() {
     }
 
-    public UserInfoBase(Long id, String name, Byte sex, Date birthday, Double weight, Integer status, String remark) {
+    public UserInfoBase(Long id, String name, Integer sex, Date birthday, Double weight, Integer status, String remark) {
         this.id = id;
         this.name = name;
         this.sex = sex;
@@ -74,11 +74,11 @@ public class UserInfoBase {
         this.name = name;
     }
 
-    public Byte getSex() {
+    public Integer getSex() {
         return sex;
     }
 
-    public void setSex(Byte sex) {
+    public void setSex(Integer sex) {
         this.sex = sex;
     }
 

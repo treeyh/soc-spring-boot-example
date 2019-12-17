@@ -1,155 +1,89 @@
 package com.treeyh.example.springboot.dao.po;
 
+import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
+
 import java.util.Date;
 
-public class AppInfoPo {
-    private Long id;
+@Data
+@TableName("app_info")
+@EqualsAndHashCode
+@Accessors(chain = true)
+public class AppInfoPo  {
 
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * 应用编号
+     */
     private String appId;
 
+    /**
+     * 应用名称
+     */
     private String appName;
 
+    /**
+     * 秘钥1
+     */
     private String appSecret1;
 
+    /**
+     * 秘钥2，秘钥替换时使用
+     */
     private String appSecret2;
 
+    /**
+     * 负责人
+     */
     private String owner;
 
+    /**
+     * 项目url
+     */
     private String appUrl;
 
+    /**
+     * 是否进行签名校验，1校验，2不校验，3不允许接口调用
+     */
     private Integer checkStatus;
 
+    /**
+     * 状态，1可用，2停止使用
+     */
     private Integer status;
 
+    /**
+     * 备注
+     */
     private String remark;
 
+    /**
+     * 是否删除，1已删除，2未删除
+     */
     private Integer deleted;
 
+    /**
+     * 创建人
+     */
     private String createUser;
 
+    /**
+     * 创建时间
+     */
     private Date createTime;
 
+    /**
+     * 更新人
+     */
     private String updateUser;
 
+    /**
+     * 更新时间
+     */
     private Date updateTime;
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getAppId() {
-        return appId;
-    }
-
-    public void setAppId(String appId) {
-        this.appId = appId == null ? null : appId.trim();
-    }
-
-    public String getAppName() {
-        return appName;
-    }
-
-    public void setAppName(String appName) {
-        this.appName = appName == null ? null : appName.trim();
-    }
-
-    public String getAppSecret1() {
-        return appSecret1;
-    }
-
-    public void setAppSecret1(String appSecret1) {
-        this.appSecret1 = appSecret1 == null ? null : appSecret1.trim();
-    }
-
-    public String getAppSecret2() {
-        return appSecret2;
-    }
-
-    public void setAppSecret2(String appSecret2) {
-        this.appSecret2 = appSecret2 == null ? null : appSecret2.trim();
-    }
-
-    public String getOwner() {
-        return owner;
-    }
-
-    public void setOwner(String owner) {
-        this.owner = owner == null ? null : owner.trim();
-    }
-
-    public String getAppUrl() {
-        return appUrl;
-    }
-
-    public void setAppUrl(String appUrl) {
-        this.appUrl = appUrl == null ? null : appUrl.trim();
-    }
-
-    public Integer getCheckStatus() {
-        return checkStatus;
-    }
-
-    public void setCheckStatus(Integer checkStatus) {
-        this.checkStatus = checkStatus;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark == null ? null : remark.trim();
-    }
-
-    public Integer getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(Integer deleted) {
-        this.deleted = deleted;
-    }
-
-    public String getCreateUser() {
-        return createUser;
-    }
-
-    public void setCreateUser(String createUser) {
-        this.createUser = createUser == null ? null : createUser.trim();
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public String getUpdateUser() {
-        return updateUser;
-    }
-
-    public void setUpdateUser(String updateUser) {
-        this.updateUser = updateUser == null ? null : updateUser.trim();
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
 }

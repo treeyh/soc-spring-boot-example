@@ -1,5 +1,7 @@
 package com.treeyh.example.springboot.manager.domain.repository;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.treeyh.common.utils.ClazzConverterUtils;
 import com.treeyh.example.springboot.dao.AppInfoPoMapper;
 import com.treeyh.example.springboot.dao.po.AppInfoPo;
@@ -31,7 +33,9 @@ public class AppInfoRepository {
             return null;
         }
 
-        AppInfoPo appInfoPo = appInfoPoMapper.selectByAppId(appId);
+        QueryWrapper<AppInfoPo> wrapper = new QueryWrapper<>();
+        wrapper.eq("app_id", appId);
+        AppInfoPo appInfoPo = appInfoPoMapper.selectOne(wrapper);
 
         if(null == appInfoPo){
             return null;

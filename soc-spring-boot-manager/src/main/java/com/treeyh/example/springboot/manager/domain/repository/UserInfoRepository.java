@@ -1,11 +1,14 @@
 package com.treeyh.example.springboot.manager.domain.repository;
 
+import com.alibaba.fastjson.TypeReference;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.treeyh.common.model.result.PageResult;
 import com.treeyh.common.utils.ClazzConverterUtils;
 import com.treeyh.example.springboot.api.enums.DeleteEnum;
 import com.treeyh.example.springboot.dao.UserInfoPoMapper;
 import com.treeyh.example.springboot.dao.po.UserInfoPo;
-import com.treeyh.example.springboot.dao.po.UserInfoPoExample;
 import com.treeyh.example.springboot.manager.bo.UserInfoBo;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -13,9 +16,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author TreeYH
@@ -38,7 +39,7 @@ public class UserInfoRepository {
      * @return
      */
     public UserInfoBo queryById(long id){
-        UserInfoPo userInfoPo = userInfoPoMapper.selectByPrimaryKey(id);
+        UserInfoPo userInfoPo = userInfoPoMapper.selectById(id);
         return ClazzConverterUtils.converterClass(userInfoPo, UserInfoBo.class);
     }
 
@@ -49,10 +50,10 @@ public class UserInfoRepository {
      */
     public List<UserInfoBo> queryByName(String name){
 
-        UserInfoPoExample userInfoPoExample = new UserInfoPoExample();
-        userInfoPoExample.createCriteria().andNameEqualTo(name);
+        Map<String, Object> map = new HashMap<>();
+        map.put("name", name);
 
-        List<UserInfoPo> activeInfos = userInfoPoMapper.selectByExample(userInfoPoExample);
+        List<UserInfoPo> activeInfos = userInfoPoMapper.selectByMap(map);
 
         return (List<UserInfoBo>)ClazzConverterUtils.converterClass(activeInfos, UserInfoBo.class);
     }
@@ -68,7 +69,7 @@ public class UserInfoRepository {
 
         userInfoPo.setDeleted(DeleteEnum.NO_DELETE.getCode());
 
-        int rt = userInfoPoMapper.insertSelective(userInfoPo);
+        int rt = userInfoPoMapper.insert(userInfoPo);
 //        if(rt > 0){
 //            userInfoBo.setId(userInfoPo.getId());
 //        }
@@ -83,7 +84,7 @@ public class UserInfoRepository {
      * @return
      */
     public int deleteById(long id){
-        return userInfoPoMapper.deleteByPrimaryKey(id);
+        return userInfoPoMapper.deleteById(id);
     }
 
 
@@ -97,32 +98,28 @@ public class UserInfoRepository {
      */
     public PageResult<UserInfoBo> queryByPage(String name, Integer status, Long pageNum, Long pageSize){
 
-        UserInfoPoExample example = new UserInfoPoExample();
+        QueryWrapper<UserInfoPo> wrapper = new QueryWrapper<>();
 
-        UserInfoPoExample.Criteria criteria = example.createCriteria();
         if(StringUtils.isNotEmpty(name)){
-            criteria.andNameLike(name + "%");
+            wrapper.likeRight("name", name);
         }
         if(null != status && 0 < status){
-            criteria.andStatusEqualTo(status);
+            wrapper.eq("status", status);
         }
-        example.setOrderByClause("id desc"); // 设置排序方式
+        wrapper.orderByDesc("id"); // 设置排序方式
 
-        int offset = (pageNum.intValue() - 1) * pageSize.intValue();
 
-        example.setOffset(offset);
-        example.setLimit(pageSize.intValue());
+        Page<UserInfoPo> page = new Page<>(pageNum, pageSize);
 
-        Integer total = userInfoPoMapper.countByExample(example);
-        List<UserInfoPo> userInfoPos = userInfoPoMapper.selectByExample(example);
+        IPage<UserInfoPo> pageResult = userInfoPoMapper.selectPage(page, wrapper);
 
-        if(null == userInfoPos || userInfoPos.size() <= 0){
-            return new PageResult<UserInfoBo>(Long.parseLong(total.toString()), pageNum, pageSize, new ArrayList<UserInfoBo>());
+        if(null == pageResult || pageResult.getRecords().size() <= 0){
+            return new PageResult<UserInfoBo>(pageResult.getTotal(), pageNum, pageSize, new ArrayList<UserInfoBo>());
         }
 
-        List<UserInfoBo> demoModels = (List<UserInfoBo>) ClazzConverterUtils.converterClass(userInfoPos, UserInfoBo.class);
+        IPage<UserInfoBo> pageResult2  =  ClazzConverterUtils.converterClass(pageResult, new TypeReference<Page<UserInfoBo>>(){});
 
-        return new PageResult<UserInfoBo>(Long.parseLong(total.toString()), pageNum, pageSize, demoModels);
+        return new PageResult<UserInfoBo>(pageResult2.getTotal(), pageNum, pageSize, pageResult2.getRecords());
 
     }
 
@@ -134,20 +131,21 @@ public class UserInfoRepository {
      */
     public int updateById(UserInfoBo userInfoBo){
 
-        UserInfoPo activeInfo = new UserInfoPo();
-        activeInfo.setId(userInfoBo.getId());
+        UserInfoPo userInfoPo = new UserInfoPo();
+        userInfoPo.setId(userInfoBo.getId());
         if(null != userInfoBo.getName()) {
-            activeInfo.setName(userInfoBo.getName());
+            userInfoPo.setName(userInfoBo.getName());
         }
         if(null != userInfoBo.getStatus()) {
-            activeInfo.setStatus(userInfoBo.getStatus().intValue());
+            userInfoPo.setStatus(userInfoBo.getStatus().intValue());
         }
-        activeInfo.setUpdateTime(new Date());
+        userInfoPo.setUpdateTime(new Date());
 
-        UserInfoPoExample example = new UserInfoPoExample();
-        example.createCriteria().andIdEqualTo(userInfoBo.getId());
+        QueryWrapper<UserInfoPo> wrapper = new QueryWrapper<>();
 
-        return userInfoPoMapper.updateByExampleSelective(activeInfo, example);
+        wrapper.eq("id", userInfoBo.getId());
+
+        return userInfoPoMapper.update(userInfoPo, wrapper);
     }
 
 }

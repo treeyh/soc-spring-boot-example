@@ -1,105 +1,70 @@
 package com.treeyh.example.springboot.dao.po;
 
+import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
+
+import java.time.LocalDateTime;
 import java.util.Date;
 
+@Data
+@TableName("user_info")
+@EqualsAndHashCode
+@Accessors(chain = true)
 public class UserInfoPo {
+
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * 用户id
+     */
     private Long id;
 
+    /**
+     * 用户名
+     */
     private String name;
 
-    private Byte sex;
+    /**
+     * 性别，0未知，1男，2女
+     */
+    private Integer sex;
 
+    /**
+     * 生日
+     */
     private Date birthday;
 
+    /**
+     * 体重
+     */
     private Double weight;
 
+    /**
+     * 状态，1可用，2不可用
+     */
     private Integer status;
 
+    /**
+     * 备注
+     */
     private String remark;
 
+    /**
+     * 是否删除，1删除，2未删除
+     */
     private Integer deleted;
 
+    /**
+     * 创建时间
+     */
     private Date createTime;
 
+    /**
+     * 最后更新时间
+     */
     private Date updateTime;
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
-    }
-
-    public Byte getSex() {
-        return sex;
-    }
-
-    public void setSex(Byte sex) {
-        this.sex = sex;
-    }
-
-    public Date getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
-    }
-
-    public Double getWeight() {
-        return weight;
-    }
-
-    public void setWeight(Double weight) {
-        this.weight = weight;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark == null ? null : remark.trim();
-    }
-
-    public Integer getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(Integer deleted) {
-        this.deleted = deleted;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
 }

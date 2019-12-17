@@ -52,7 +52,7 @@ public class UserInfoMapper01Test extends BaseTest {
     @Test
     public void queryById() throws Exception {
         Long id = 2L;
-        UserInfoPo userInfoPo = userInfoPoMapper.selectByPrimaryKey(id);
+        UserInfoPo userInfoPo = userInfoPoMapper.selectById(id);
         Assertions.assertThat(userInfoPo.getId()).isEqualTo(id);
         System.out.printf("==========================================UserInfoMapper01Test.queryById%s", JsonUtils.toJson(userInfoPo));
     }

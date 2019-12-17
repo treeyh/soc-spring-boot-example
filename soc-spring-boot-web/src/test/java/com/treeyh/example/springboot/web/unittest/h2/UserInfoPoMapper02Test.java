@@ -2,14 +2,11 @@ package com.treeyh.example.springboot.web.unittest.h2;
 
 import com.github.database.rider.core.api.dataset.DataSet;
 import com.treeyh.common.utils.JsonUtils;
-import com.treeyh.common.utils.UuidUtils;
 import com.treeyh.example.springboot.api.enums.DeleteEnum;
 import com.treeyh.example.springboot.api.enums.SexEnum;
 import com.treeyh.example.springboot.api.enums.StatusEnum;
 import com.treeyh.example.springboot.dao.UserInfoPoMapper;
 import com.treeyh.example.springboot.dao.po.UserInfoPo;
-import com.treeyh.example.springboot.dao.po.UserInfoPoExample;
-import org.apache.commons.lang3.StringUtils;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,7 +56,7 @@ public class UserInfoPoMapper02Test extends BaseH2MockTest{
     @DataSet(value = {"db/data/user_info.yml"})
     public void queryById() throws Exception {
         Long id = 9L;
-        UserInfoPo userInfoPo = userInfoPoMapper.selectByPrimaryKey(id);
+        UserInfoPo userInfoPo = userInfoPoMapper.selectById(id);
         Assertions.assertThat(userInfoPo.getId()).isEqualTo(id);
         System.out.printf("==========================================UserInfoPoMapper01Test.queryById%s", JsonUtils.toJson(userInfoPo));
     }
