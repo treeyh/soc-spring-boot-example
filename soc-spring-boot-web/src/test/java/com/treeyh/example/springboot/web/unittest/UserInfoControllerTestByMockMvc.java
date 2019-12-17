@@ -29,13 +29,34 @@ public class UserInfoControllerTestByMockMvc extends BaseTest {
     @Test
     public void testQuery() throws Exception {
 
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/user/2").contentType(MediaType.APPLICATION_JSON_UTF8))
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/user/2").contentType(MediaType.APPLICATION_JSON))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(0))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data").exists())
                 .andReturn().getResponse().getContentAsString();
     }
+
+
+
+    @Test
+    public void testQueryByPage() throws Exception {
+
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/user").contentType(MediaType.APPLICATION_JSON).param("page", "1").param("size", "2"))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(0))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data").exists())
+                .andReturn().getResponse().getContentAsString();
+
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/user").contentType(MediaType.APPLICATION_JSON).param("name", "name").param("page", "1").param("size", "2"))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(0))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data").exists())
+                .andReturn().getResponse().getContentAsString();
+    }
+
 
     @Test
     public void testAdd() throws Exception {
@@ -50,7 +71,7 @@ public class UserInfoControllerTestByMockMvc extends BaseTest {
         userInfoReq.setWeight(79.2D);
 
         this.mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/user")
-                .contentType(MediaType.APPLICATION_JSON_UTF8).content(JsonUtils.toJson(userInfoReq)))
+                .contentType(MediaType.APPLICATION_JSON).content(JsonUtils.toJson(userInfoReq)))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(0))

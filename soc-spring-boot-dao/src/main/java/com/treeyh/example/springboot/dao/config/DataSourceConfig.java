@@ -27,9 +27,6 @@ import javax.sql.DataSource;
  * @description 描述
  * @create 2019-05-21 11:04
  */
-//@Configuration
-//@EnableTransactionManagement
-//@MapperScan(value = "com.treeyh.example.springboot.dao", sqlSessionFactoryRef = "sqlSessionFactoryBean")
 
 @EnableTransactionManagement
 @Configuration
@@ -37,41 +34,6 @@ import javax.sql.DataSource;
 public class DataSourceConfig { //implements TransactionManagementConfigurer {
 
     private final static Logger logger = LoggerFactory.getLogger(DataSourceConfig.class);
-
-//    @Value(value = "classpath:bean/mybatis/mapping/*.xml")
-//    private Resource[] mapperLocations;
-//
-//    @Value(value = "classpath:mybatis-config.xml")
-//    private Resource configLocation;
-
-
-//    @Value("${spring.datasourceType}")
-//    private Class<? extends DataSource> datasourceType;
-
-
-//    @Primary
-//    @Bean(name = "sqlSessionFactoryBean")
-//    public SqlSessionFactoryBean sqlSessionFactory(@Qualifier("dataSource") DataSource dataSource) {
-//        SqlSessionFactoryBean ssfb = new SqlSessionFactoryBean();
-//        ssfb.setDataSource(dataSource);
-//        ssfb.setMapperLocations(mapperLocations);
-//        ssfb.setConfigLocation(configLocation);
-//        ssfb.setTypeAliasesPackage("com.treeyh.example.springboot.dao");
-//        return ssfb;
-//    }
-//
-//    @Primary
-//    @Bean(name = "dataSource", destroyMethod = "close") //initMethod = "init",
-//    @ConfigurationProperties(prefix = "spring.datasource.hikari")
-//    public DataSource dataSource() {
-//
-//        return DataSourceBuilder.create().type(HikariDataSource.class).build();
-//    }
-//
-//    @Override
-//    public PlatformTransactionManager annotationDrivenTransactionManager() {
-//        return new DataSourceTransactionManager(dataSource());
-//    }
 
     @Bean
     public PaginationInterceptor paginationInterceptor() {

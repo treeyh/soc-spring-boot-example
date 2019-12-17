@@ -78,7 +78,7 @@ public class UserInfoControllerTestByMockService extends BaseTest {
         BDDMockito.given(this.userInfoService.queryById(userInfoBo.getId())).willReturn(CallResult.makeCallResult(true, SysResultCode.SUCCESS, userInfoBo, null));
 
 
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/user/1").contentType(MediaType.APPLICATION_JSON_UTF8))
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/user/1").contentType(MediaType.APPLICATION_JSON))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(0))
@@ -87,7 +87,7 @@ public class UserInfoControllerTestByMockService extends BaseTest {
                 .andReturn().getResponse().getContentAsString();
 
 
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/user/1").contentType(MediaType.APPLICATION_JSON_UTF8))
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/user/1").contentType(MediaType.APPLICATION_JSON))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(0))

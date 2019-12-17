@@ -62,7 +62,7 @@ public class UserInfoControllerTestByH2Mock extends BaseH2MockTest {
 //    @Test
 //    @Sql(value = {"/db/data/init_user_info.sql"})
 //    public void test03Query() throws Exception{
-//        this.mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/user/4").contentType(MediaType.APPLICATION_JSON_UTF8))
+//        this.mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/user/4").contentType(MediaType.APPLICATION_JSON))
 //                .andDo(MockMvcResultHandlers.print())
 //                .andExpect(MockMvcResultMatchers.status().isOk())
 //                .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(0))
@@ -88,7 +88,7 @@ public class UserInfoControllerTestByH2Mock extends BaseH2MockTest {
     @Test
     @DataSet(value = {"db/data/user_info.yml"})
     public void test05Query() throws Exception{
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/user/9").contentType(MediaType.APPLICATION_JSON_UTF8))
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/user/9").contentType(MediaType.APPLICATION_JSON))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(0))
