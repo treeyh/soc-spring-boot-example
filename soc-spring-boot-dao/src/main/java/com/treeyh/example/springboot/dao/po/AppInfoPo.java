@@ -1,6 +1,9 @@
 package com.treeyh.example.springboot.dao.po;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -14,6 +17,11 @@ import java.util.Date;
 public class AppInfoPo  {
 
     private static final long serialVersionUID = 1L;
+
+    /**主键*/
+    @TableId(type = IdType.INPUT)
+    @ApiModelProperty(value = "主键")
+    private Long id;
 
     /**
      * 应用编号
