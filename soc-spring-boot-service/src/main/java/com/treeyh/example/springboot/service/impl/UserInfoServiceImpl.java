@@ -4,6 +4,8 @@ import com.treeyh.common.exception.SysErrorException;
 import com.treeyh.common.model.LogModel;
 import com.treeyh.common.model.result.CallResult;
 import com.treeyh.common.model.result.PageResult;
+import com.treeyh.common.model.result.ResultCode;
+import com.treeyh.common.model.result.ResultCodeInfo;
 import com.treeyh.common.utils.UuidUtils;
 import com.treeyh.example.springboot.api.model.base.resp.SysResultCode;
 import com.treeyh.example.springboot.common.constants.SysConstants;
@@ -16,6 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author TreeYH
@@ -51,9 +54,10 @@ public class UserInfoServiceImpl extends BaseService implements UserInfoService 
         return this.makeSuccessResult(result);
     }
 
+    @Transactional
     @Override
     public CallResult<UserInfoBo> createDemo(UserInfoBo userInfoBo) {
-        final LogModel lm = LogModel.newLogModel("UserInfoServiceImpl.insertDemo")
+        final LogModel lm = LogModel.newLogModel("UserInfoServiceImpl.createDemo")
                 .addMetaData("userInfoBo", userInfoBo);
         logger.info(lm.toJson(false));
 
@@ -69,6 +73,11 @@ public class UserInfoServiceImpl extends BaseService implements UserInfoService 
             return this.makeFailCallResult(lm, ex.getResultCodeInfo(), null, ex);
         } catch (Exception ex) {
             return this.makeFailCallResult(lm, SysResultCode.SYS_ERROR, null, ex);
+        }
+
+        // 事务测试
+        if("test".equals(userInfoBo.getName())){
+            throw new SysErrorException(SysResultCode.FAILURE);
         }
 
         lm.addMetaDataResult(userInfoBo);

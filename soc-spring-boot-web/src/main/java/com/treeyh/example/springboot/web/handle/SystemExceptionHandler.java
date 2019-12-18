@@ -53,7 +53,7 @@ public class SystemExceptionHandler {
         /**
          * 设置ContentType
          */
-        resp.setContentType(MediaType.APPLICATION_JSON_VALUE);
+        resp.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
         /**
          * 避免乱码
          */

@@ -29,7 +29,7 @@ public class UserInfoControllerTestByMockMvc extends BaseTest {
     @Test
     public void testQuery() throws Exception {
 
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/user/2").contentType(MediaType.APPLICATION_JSON))
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/user/2").contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(0))
@@ -42,14 +42,14 @@ public class UserInfoControllerTestByMockMvc extends BaseTest {
     @Test
     public void testQueryByPage() throws Exception {
 
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/user").contentType(MediaType.APPLICATION_JSON).param("page", "1").param("size", "2"))
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/user").contentType(MediaType.APPLICATION_JSON_UTF8).param("page", "1").param("size", "2"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(0))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data").exists())
                 .andReturn().getResponse().getContentAsString();
 
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/user").contentType(MediaType.APPLICATION_JSON).param("name", "name").param("page", "1").param("size", "2"))
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/user").contentType(MediaType.APPLICATION_JSON_UTF8).param("name", "name").param("page", "1").param("size", "2"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(0))
@@ -63,7 +63,8 @@ public class UserInfoControllerTestByMockMvc extends BaseTest {
         Long time = System.currentTimeMillis();
 
         UserInfoReq userInfoReq = new UserInfoReq();
-        userInfoReq.setName("name"+ System.currentTimeMillis());
+//        userInfoReq.setName("name"+ System.currentTimeMillis());
+        userInfoReq.setName("name");
         userInfoReq.setBirthday(new Date(System.currentTimeMillis()));
         userInfoReq.setId(UuidUtils.getNewIdByLong());
         userInfoReq.setRemark("remark");
@@ -71,7 +72,28 @@ public class UserInfoControllerTestByMockMvc extends BaseTest {
         userInfoReq.setWeight(79.2D);
 
         this.mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/user")
-                .contentType(MediaType.APPLICATION_JSON).content(JsonUtils.toJson(userInfoReq)))
+                .contentType(MediaType.APPLICATION_JSON_UTF8).content(JsonUtils.toJson(userInfoReq)))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(0))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data").exists())
+                .andReturn().getResponse().getContentAsString();
+    }
+
+    @Test
+    public void testAddTransactional() throws Exception {
+        Long time = System.currentTimeMillis();
+
+        UserInfoReq userInfoReq = new UserInfoReq();
+        userInfoReq.setName("test");
+        userInfoReq.setBirthday(new Date(System.currentTimeMillis()));
+        userInfoReq.setId(UuidUtils.getNewIdByLong());
+        userInfoReq.setRemark("remark");
+        userInfoReq.setSex(SexEnum.MAN.getCode());
+        userInfoReq.setWeight(79.2D);
+
+        this.mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/user")
+                .contentType(MediaType.APPLICATION_JSON_UTF8).content(JsonUtils.toJson(userInfoReq)))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(0))
