@@ -87,7 +87,7 @@ GCLOG_OPTS="-Xloggc:${LOG_PATH}/gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamp
 # 打印 GC 前后的各代大小
 #GCLOG_OPTS="$GCLOG_OPTS -XX:+PrintHeapAtGC"
 # 打印存活区每段年龄的大小
-#GCLOG_OPTS="$GCLOG_OPTS -XX:+PrintTenuringDistribution"
+GCLOG_OPTS="$GCLOG_OPTS -XX:+PrintTenuringDistribution"
 # 如果发生晋升失败，观察老生代的碎片
 #GCLOG_OPTS="$GCLOG_OPTS -XX:+UnlockDiagnosticVMOptions -XX:PrintFLSStatistics=2"
 # 打印安全点日志，找出 GC 日志里非 GC 的停顿的原因
