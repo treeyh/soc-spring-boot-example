@@ -1,7 +1,5 @@
 package com.treeyh.example.springboot.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
-import com.sun.deploy.ui.AppInfo;
 import com.treeyh.common.model.result.CallResult;
 import com.treeyh.common.model.result.PageResult;
 import com.treeyh.example.springboot.manager.bo.UserInfoBo;

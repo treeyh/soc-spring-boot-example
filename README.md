@@ -9,3 +9,4 @@
 * soc-spring-boot-web：接口实现及过滤器模块
 * soc-spring-boot-worker：计划任务模块；
 
+依赖`soc-common` 项目，先拉取该项目代码执行`mvn install`，打依赖包.

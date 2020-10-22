@@ -110,15 +110,12 @@
                 <groupId>com.treeyh.common</groupId>
                 <artifactId>soc-common-core</artifactId>
                 <version>${soc.common.version}</version>
-                <scope>system</scope>
-                <systemPath>/Users/tree/work/99_tree/03_github/soc-common/soc-common-core/target/soc-common-core-1.0-SNAPSHOT.jar</systemPath>
+
             </dependency>
             <dependency>
                 <groupId>com.treeyh.common</groupId>
                 <artifactId>soc-common-web</artifactId>
                 <version>${soc.common.version}</version>
-                <scope>system</scope>
-                <systemPath>/Users/tree/work/99_tree/03_github/soc-common/soc-common-web/target/soc-common-web-1.0-SNAPSHOT.jar</systemPath>
             </dependency>
 
 
@@ -185,16 +182,16 @@
 
 
 
-            <!--<dependency>-->
-                <!--<groupId>org.mybatis</groupId>-->
-                <!--<artifactId>mybatis</artifactId>-->
-                <!--<version>3.4.6</version>-->
-            <!--</dependency>-->
-            <!--<dependency>-->
-                <!--<groupId>org.mybatis.spring.boot</groupId>-->
-                <!--<artifactId>mybatis-spring-boot-starter</artifactId>-->
-                <!--<version>2.1.1</version>-->
-            <!--</dependency>-->
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis</artifactId>
+                <version>3.4.6</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>2.1.1</version>
+            </dependency>
             <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>

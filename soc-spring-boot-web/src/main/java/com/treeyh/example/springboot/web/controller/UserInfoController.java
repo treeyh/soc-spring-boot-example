@@ -1,6 +1,6 @@
 package com.treeyh.example.springboot.web.controller;
 
-import com.alibaba.fastjson.TypeReference;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.treeyh.common.exception.Validation;
 import com.treeyh.common.model.LogModel;
 import com.treeyh.common.model.result.CallResult;

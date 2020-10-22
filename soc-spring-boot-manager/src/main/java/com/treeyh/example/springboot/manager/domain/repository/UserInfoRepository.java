@@ -1,9 +1,10 @@
 package com.treeyh.example.springboot.manager.domain.repository;
 
-import com.alibaba.fastjson.TypeReference;
+
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.treeyh.common.model.result.PageResult;
 import com.treeyh.common.utils.ClazzConverterUtils;
 import com.treeyh.example.springboot.api.enums.DeleteEnum;
