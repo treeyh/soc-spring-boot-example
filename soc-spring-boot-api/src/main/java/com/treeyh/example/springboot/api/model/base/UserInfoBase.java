@@ -1,6 +1,5 @@
 package com.treeyh.example.springboot.api.model.base;
 
-import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**

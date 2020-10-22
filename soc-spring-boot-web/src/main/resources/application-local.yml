@@ -2,17 +2,18 @@ spring:
   application:
     name: springboot-project
   datasource:
+    url: jdbc:mysql://192.168.40.247:3306/soc_spring_boot_example?useUnicode=true&characterEncoding=UTF-8&useSSL=false&transformedBitIsBoolean=true&zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=Asia/Shanghai
     hikari:
-      jdbc-url: jdbc:mysql://127.0.0.1:3306/soc_spring_boot_example?useUnicode=true&characterEncoding=UTF-8&useSSL=false&transformedBitIsBoolean=true&zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=Asia/Shanghai
+      jdbc-url: jdbc:mysql://192.168.40.247:3306/soc_spring_boot_example?useUnicode=true&characterEncoding=UTF-8&useSSL=false&transformedBitIsBoolean=true&zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=Asia/Shanghai
       username: root
-      password: Mysql123
+      password: mysqldev
       driver-class-name: com.mysql.cj.jdbc.Driver
       maximum-pool-size: 15
       pool-name: ${pro.name}-db
     name: demo
     filters: config,log4j,stat
   redis:
-    host: 127.0.0.1
+    host: 192.168.40.247
     #    password:
     port: 6379
     key-pre: soc-web
